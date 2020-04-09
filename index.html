@@ -5,18 +5,16 @@
 
 
 <body>
-<body  onLoad="body_onload()">
-</body>
-<script language="JavaScript">
-setcookie('param_cookie',0,10);
-function body_onload()
-{
-    if(0 == getcookie('param_cookie')){
-        setcookie("param_cookie",1,10);
-        window.location.reload(true); 
-    }
-}
+
+<script>
+     if(!window.name){
+              window.name = 'test';
+              window.location.reload();
+     }
 </script>
+
+</body>
+
 
 
 
