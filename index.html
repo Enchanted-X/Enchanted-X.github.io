@@ -1,6 +1,25 @@
 <!--Powered by XEK!-->
 <!DOCTYPE html>
  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
+
+<body>
+<body  onLoad="body_onload()">
+</body>
+<script language="JavaScript">
+setcookie('param_cookie',0,10);
+function body_onload()
+{
+    if(0 == getcookie('param_cookie')){
+        setcookie("param_cookie",1,10);
+        window.location.reload(true); 
+    }
+}
+</script>
+
+
+
 <script language="JavaScript">
 	var expDays = 10;<!--cookie的期限-->
 var exp = new Date(); <!--新的时间变量-->
