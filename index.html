@@ -1,0 +1,207 @@
+<!--Powered by XEK!-->
+
+<script language="JavaScript">
+	var expDays = 10;<!--cookie的期限-->
+var exp = new Date(); <!--新的时间变量-->
+exp.setTime(exp.getTime() + (expDays*24*60*60*1000));<!--过期的日期-->
+
+function Who(info){<!--获得访问者的昵称-->
+var VisitorName = GetCookie('VisitorName')<!--先从cookie中查找visitorName字段
+if (VisitorName == null) {<!--如果没有找到，则提示用户输入昵称-->
+VisitorName = prompt("请输入你的称呢：",'');<!--弹出提示窗口-->
+SetCookie ('VisitorName', VisitorName, exp);<!--将用户输入的昵称写入cookie中-->
+}
+return VisitorName;<!--返回用户的昵称-->
+} 
+
+function When(info){<!--返回用户的上次访问时间-->
+var rightNow = new Date()<!--构造变量-->
+var WWHTime = 0;
+WWHTime = GetCookie('WWhenH')<!--从cookie中获取上一次的时间-->
+
+WWHTime = WWHTime * 1
+var lastHereFormatting = new Date(WWHTime); 
+var intLastVisit = (lastHereFormatting.getYear() * 10000)+(lastHereFormatting.getMonth() * 100) + lastHereFormatting.getDate()<!--转化时间格式-->
+var lastHereInDateFormat = "" + lastHereFormatting;
+var dayOfWeek = lastHereInDateFormat.substring(0,3)<!--获取日子-->
+var dateMonth = lastHereInDateFormat.substring(4,11)<!--获取日期-->
+var timeOfDay = lastHereInDateFormat.substring(11,16)<!--获取时间-->
+var year = lastHereInDateFormat.substring(23,25)<!--获取年份-->
+var WWHText = dayOfWeek + "&nbsp;" + dateMonth+ timeOfDay<!--按日、月、年重新组合日期-->
+SetCookie ("WWhenH", rightNow.getTime(), exp)<!--将用户访问时间和过期时间均写入cookie中-->
+return WWHText;
+}
+
+function Count(info){<!--返回用户上站次数-->
+var WWHCount = GetCookie('WWHCount')<!--从cookie中读取wwwhcount字段-->
+if (WWHCount == null) {<!--如果返回值为空-->
+WWHCount = 0;<!--上站次数为0-->
+}
+else{
+WWHCount++;<!--否则，上站次数加1-->
+}
+SetCookie ('WWHCount', WWHCount, exp);<!--同时将更新过的信息写入cookie中-->
+return WWHCount;<!--返回上站次数-->
+}
+
+function set(){
+VisitorName = prompt("请输入你的新称呢：",'');<!--弹出窗口，提示输入昵称-->
+SetCookie ('VisitorName', VisitorName, exp);<!--将用户昵称写入cookie中-->
+SetCookie ('WWHCount', 0, exp);<!--将用户上站次数0写入cookie中-->
+SetCookie ('WWhenH', 0, exp);<!--将用户最后上站时间写入cookie中-->
+}
+
+function getCookieVal (offset) {<!--返回cookie中一定位置的字段-->
+   var endstr = document.cookie.indexOf (";", offset);<!--获取指定位置字段的末尾的位置-->
+   if (endstr == -1)<!--如果返回值为－1-->
+     endstr = document.cookie.length;<!--则将给定位置后的所有字符串均返回-->
+  return unescape(document.cookie.substring(offset, endstr));<!--返回字符串-->
+}
+
+
+function GetCookie (name) {<!--从cookie中获取字段的值-->
+        var arg = name + "=";<!--变量-->
+      var alen = arg.length;<!--字段的长度-->
+        var clen = document.cookie.length;<!--cookie的长度-->
+        var i = 0;
+        while (i < clen) {<!--在cookie中-->
+               var j = i + alen;<!--移动一个字段的宽度-->
+                if (document.cookie.substring(i, j) == arg)<!--如果是待找字段-->
+                        return getCookieVal (j);<!--返回字段的值-->
+                i = document.cookie.indexOf(" ", i) + 1;<!--更新i的值-->
+                        if (i == 0)
+                                break;<!--如果找完了，返回-->
+               }
+   return null;
+}
+
+
+
+
+function SetCookie (name, value) {<!--向cookie中写入-->
+        var argv = SetCookie.arguments;<!--写入的变量数组-->
+        var argc = SetCookie.arguments.length;<!--变量的个数-->
+        var expires = (argc > 2) ? argv[2] : null;<!--变量数组中的第二个表示过期的时间-->
+        var path = (argc > 3) ? argv[3] : null;<!--变量的第三个表示路径-->
+        var domain = (argc > 4) ? argv[4] : null;<!--变量的第四个表示域-->
+        var secure = (argc > 5) ? argv[5] : false;<!--变量的第五个表示权限-->
+        document.cookie = name + "=" + escape (value) +
+                ((expires == null) ? "" : ("; expires=" +
+expires.toGMTString())) +
+                ((path == null) ? "" : ("; path=" + path)) +
+                ((domain == null) ? "" : ("; domain=" + domain)) +
+                ((secure == true) ? "; secure" : "");<!--按照给定的格式写入cookie-->
+
+}
+
+
+</script>
+</head>
+<body>
+<script language="JavaScript">
+document.write("您好 <b>" + Who() + "</b>，您是第 <b>" + Count() + "</b> 次访问本主页. <br>最后一次是 <b>" + When() +"</b>")
+document.write('<a href="JavaScript:set()">[按此改名]</a>')
+</script>
+</body>
+
+
+<body>
+
+</body>
+
+</html>
+<!--本例程实现了显示访客登陆信息的功能-->
+<!--访客的登陆信息包括访客的昵称、访问的次数以及上次访问的时间-->
+<!--cookie的读写操作-->
+<!--时间函数以及字符串函数的使用方法-->
+
+
+<html>
+
+<head>
+
+<style>
+<!--
+ p.MsoNormal
+	{mso-style-parent:"";
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	font-size:10.5pt;
+	font-family:"Calibri","sans-serif";
+	margin-left:0cm; margin-right:0cm; margin-top:0cm}
+table.1
+	{border:1.0pt solid windowtext;
+	font-size:10.0pt;
+	font-family:"Times New Roman","serif";
+	}
+table.MsoTableGrid
+	{border:1.0pt solid windowtext;
+	font-size:10.5pt;
+	font-family:"Calibri","sans-serif";
+	}
+-->
+</style>
+
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+<title>SoftwareInf</title>
+</head>
+<body>
+
+<p class="MsoNormal">　</p>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;</span></p>
+
+<table class="1" border="0" cellspacing="0" cellpadding="0" width="135" style="border-collapse: collapse; border: medium none">
+	<tr style="height: 22.5pt">
+		<td width="33" style="width: 25.1pt; height: 22.5pt; border: 1.0pt solid red; padding: 0cm">
+		<p class="MsoNormal" align="center" style="text-align:center"><b>
+		<span lang="EN-US" style="font-size: 12.0pt; font-family: 宋体">NO.</span></b></td>
+		<td width="34" style="width: 25.15pt; height: 22.5pt; border-left: medium none; border-right: 1.0pt solid red; border-top: 1.0pt solid red; border-bottom: 1.0pt solid red; padding: 0cm">
+		<p class="MsoNormal" align="center" style="text-align:center">
+		<span lang="EN-US" style="font-size: 12.0pt; font-family: 'Arial Black',sans-serif">
+		0</span></td>
+		<td width="34" style="width: 25.6pt; height: 22.5pt; border-left: medium none; border-right: 1.0pt solid red; border-top: 1.0pt solid red; border-bottom: 1.0pt solid red; padding: 0cm">
+		<p class="MsoNormal" align="center" style="text-align:center">
+		<span lang="EN-US" style="font-size: 12.0pt; font-family: 'Arial Black',sans-serif">
+		0</span></td>
+		<td width="34" style="width: 25.5pt; height: 22.5pt; border-left: medium none; border-right: 1.0pt solid red; border-top: 1.0pt solid red; border-bottom: 1.0pt solid red; padding: 0cm">
+		<p class="MsoNormal" align="center" style="text-align:center">
+		<span lang="EN-US" style="font-size: 12.0pt; font-family: 'Arial Black',sans-serif">
+		1</span></td>
+	</tr>
+</table>
+
+<p class="MsoNormal" align="center">　</p>
+
+<div align="center">
+
+	<table class="MsoTableGrid" border="1" cellspacing="0" cellpadding="0" width="659" style="width: 494.1pt; border-collapse: collapse; border: medium none">
+		<tr style="height: 28.65pt">
+			<td width="659" style="width: 494.1pt; height: 28.65pt; border: 1.0pt solid red; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm; background: fuchsia">
+			<p class="MsoNormal">
+			<span lang="EN-US" style="font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">
+			ImageBadger Image Converter v4.949 </span>
+			<span style="font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">
+			注册码：</span></td>
+		</tr>
+		<tr style="height: 28.65pt">
+			<td width="659" style="width: 494.1pt; height: 28.65pt; border-left: 1.0pt solid red; border-right: 1.0pt solid red; border-top: medium none; border-bottom: 1.0pt solid red; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+			<p class="MsoNormal">
+			<span lang="EN-US" style="font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">
+			Name: Matthias Rhein</span></td>
+		</tr>
+		<tr style="height: 29.95pt">
+			<td width="659" style="width: 494.1pt; height: 29.95pt; border-left: 1.0pt solid red; border-right: 1.0pt solid red; border-top: medium none; border-bottom: 1.0pt solid red; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+			<p class="MsoNormal">
+			<span lang="EN-US" style="font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">
+			Key: 
+			000015-4D86D2-9XGBVK-83P287-1521VQ-WY70N2-1U16E6-RT4EK6-OE99EQ-FY49YB</span></td>
+		</tr>
+	</table>
+
+</div>
+
+</body>
+
+</html>
