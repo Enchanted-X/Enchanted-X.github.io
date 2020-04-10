@@ -1,3 +1,6 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+
 function r()
 {
 var username=document.getElementById("username");
