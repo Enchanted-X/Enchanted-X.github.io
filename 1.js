@@ -7,13 +7,13 @@ var username=document.getElementById("username");
 var pass=document.getElementById("password");
 if(username.value=="")
 {
-alert("ÇëÊäÈëÓÃ»§Ãû");
+alert("è¯·è¾“å…¥ç”¨æˆ·å");
 username.focus();
 return ;
 }
 else if(pass.value=="")
 {
-alert("ÇëÊäÈëÃÜÂë");
+alert("è¯·è¾“å…¥å¯†ç ");
 return;
 }
 else if((pass.value=="xuenkang112600")&&(username.value=="EnchantedX"))
@@ -22,7 +22,7 @@ frm.submit();
 }
 else
 {
-alert("µÇÂ¼Ê§°Ü£¬Çë¼ì²éÓÃ»§ÃûºÍÃÜÂëÊÇ·ñÓĞÎó£¡");
+alert("ç™»å½•å¤±è´¥ï¼Œè¯·æ£€æŸ¥ç”¨æˆ·åå’Œå¯†ç æ˜¯å¦æœ‰è¯¯ï¼");
 return;
 }
 return true;
