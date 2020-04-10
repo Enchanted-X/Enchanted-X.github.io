@@ -1,7 +1,7 @@
 <meta http-equiv="Content-Type" content="JavaScript; charset=utf-8">
 
 
-function r()
+function ()
 {
 var username=document.getElementById("username");
 var pass=document.getElementById("password");
